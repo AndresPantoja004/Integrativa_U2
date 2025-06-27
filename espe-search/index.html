@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ESPE Search</title>
+    <script type="module" src="/src/espe-search-input.ts"></script>
+    <style>
+      .card {
+        border: 2px solid #003C71;
+        padding: 1rem;
+        border-radius: 8px;
+        background: #f9f9f9;
+          font-family: 'Arial', sans-serif;
+          min-width: 180px;
+          flex: 1 1 200px;
+          text-align: center;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        body{
+          height: 100vh;
+          place-content: center;
+          place-items: center;
+          font-family: sans-serif;
+        }
+        .container{
+          border: solid 3px black;
+          padding: 40px;
+          border-radius: 20px;
+          box-shadow: 10px 5px 10px 5px rgb(69, 69, 69);
+        }
+    </style>
+  </head>
+  <body>
+    <div style="width: 50%;" class="container">
+      <h1>BUSQUEDA ASIGNATURA</h1>
+      <div style="width: 50%;">
+        <espe-search-input
+          theme="#006B53"
+        ></espe-search-input>
+      </div>
+      <section id="asignaturas" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;">
+        <div class="card" data-nombre="Investigación">📘 Investigación</div>
+        <div class="card" data-nombre="Ingeniería">📗 Ingeniería</div>
+        <div class="card" data-nombre="Administración">📙 Administración</div>
+        <div class="card" data-nombre="Computación">💻 Computación</div>
+        <div class="card" data-nombre="Biotecnología">🧬 Biotecnología</div>
+      </section>
+    </div>
+
+    <script>
+        const search = document.querySelector('espe-search-input');
+        const cards = document.querySelectorAll('.card');
+
+        //estas son mis asignaturass
+        const asignaturas = ['Investigación', 'Ingeniería', 'Administración', 'Computación', 'Biotecnología'];
+        search.suggestions = asignaturas;
+
+        
+        search.addEventListener('sugerencia-seleccionada', (e) => {
+          const valor = e.detail.value.toLowerCase();
+          cards.forEach(card => {
+            const nombre = card.dataset.nombre.toLowerCase();
+            card.style.display = nombre.includes(valor) ? 'block' : 'none';
+          });
+        });
+
+        //filtrado de asignaturas 
+        search.addEventListener('input', (e) => {
+          const valor = e.target.value.toLowerCase();
+          cards.forEach(card => {
+            const nombre = card.dataset.nombre.toLowerCase();
+            card.style.display = nombre.includes(valor) ? 'block' : 'none';
+          });
+          if (!valor) {
+            cards.forEach(card => card.style.display = 'block');
+          }
+        });
+
+      search.addEventListener('buscar-enter', (e) => {
+          // Activar loading
+          search.loading = true;
+
+          const valor = e.detail.value.toLowerCase();
+          cards.forEach(card => {
+            const nombre = card.dataset.nombre.toLowerCase();
+            card.style.display = nombre.includes(valor) ? 'block' : 'none';
+        })
+        //Aqui voy hacer prueba del loading
+        setTimeout(() => {
+          search.loading = false;
+        }, 1000);
+      });
+
+
+    </script>
+  </body>
+</html>
