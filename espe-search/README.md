@@ -79,8 +79,9 @@ Las siguientes imágenes muestran el componente en diferentes usos:
 | 🧠 Con sugerencias                | `docs/4-suggestions.png`               |
 | ✅ Resultado de búsqueda          | `docs/5-result.png`                    |
 
-```md
-### 1. Componente por defecto
+
+### Componente por defecto
+
 ![Default](docs/default.png)
 
 ### 2. Tema personalizado
@@ -94,7 +95,7 @@ Las siguientes imágenes muestran el componente en diferentes usos:
 
 ### 5. Resultado de búsqueda
 ![Resultado](docs/result.png)
-```
+
 
 ---
 
